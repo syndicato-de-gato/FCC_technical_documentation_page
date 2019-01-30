@@ -1,0 +1,358 @@
+<html>
+
+<head>
+    <title>
+        BTCPay documentation page
+    </title>
+    <style>
+        body {
+            background-color: antiquewhite
+        }
+
+        .main-section
+
+        ul {
+          list-style-type: none;
+          margin: 0;
+          padding: 0;
+        } 
+    </style>
+
+</head>
+
+<body>
+    <nav id="navbar">
+    <header>BTCPay Server Documentation</header>
+    <ul>
+        <li><a href="#intro-to-btcpay" rel="internal">Intro to BTCPay</a></li>
+        <li><a href="#btcpay-installation" rel="internal">BTCPay Installation</a></li>
+        <li><a href="#btcpay-features" rel="internal">BTCPay Features</a></li>
+        <li><a href="#btcpay-integrations" rel="internal">BTCPay Integrations</a></li>
+        <li><a href="#btcpay-development" rel="internal">BTCPay Development</a></li>
+        <li><a href="#btcpay-faq" rel="internal">BTCPay FAQ</a></li>
+    </ul>
+    </nav>
+    <main id="main-doc">
+        <section class="main-section" id="intro-to-btcpay">
+            <header>Intro to BTCPay</header>
+            <div>
+                <h3>What is BTCPay Server?</h3>
+                <p>BTCPayServer is an open-source, self-hosted payment processor for Bitcoin and other
+                    cryptocurrencies.</p>
+                <p>If you have any troubles with BTCPay, please file a Github issue. If you have more general
+                    questions,
+                    please join the community chat on Mattermost or check the FAQ page Page for solutions to common
+                    problems.</p>
+                <ul style="list-style-type:disc;">
+                    <li>Direct, peer-to-peer Bitcoin and altcoin payments</li>
+                    <li>No transaction fees (other than those for the crypto networks)</li>
+                    <li>No processing fees</li>
+                    <li>No middleman</li>
+                    <li>No AML/KYC</li>
+                    <li>User has complete control over private keys</li>
+                    <li>Enhanced privacy</li>
+                    <li>Enhanced security</li>
+                    <li>Self-hosted</li>
+                    <li>Segwit support</li>
+                    <li>Lightning Network support (LND and c-lightning)</li>
+                    <li>Altcoin support</li>
+                    <li>Full compatibility with BitPay API (easy migration)</li>
+                    <li>Process payments for others</li>
+                    <li>Easy-embeddable Payment buttons</li>
+                    <li>Point of sale app</li>
+                    <li>Crowdfunding app</li>
+                </ul>
+                <h3>How does it work?</h3>
+                <p>In layman words, BTCPay Server is a self-hosted and automated invoicing system. When checking out,
+                    the customer is presented with an invoice. Each time, a different address is tied to a particular
+                    invoice, so there is no address re-use. BTCPay follows the status of the invoice through the
+                    blockchain and informs a merchant when he can fulfill the order safely.</p>
+                <h3>How is it different</h3>
+                <p>BTCPay is a code, not a company. There is no third-party between a merchant and a customer. Merchant
+                    is always in full control of the funds. There are no processing or subscription fees. BTCPay Server
+                    is free to use and completely open-source, so developers or security auditors can always inspect
+                    the quality of the code.</p>
+                <h3>How it keeps funds secure</h3>
+                <p>Payments via BTCPay are direct, peer to peer. The merchant receives the coins directly to their
+                    wallet, with no intermediate. Securing funds comes down to the merchant securing their own private
+                    keys, which is standard for most cryptocurrency wallets. There is an internal wallet inside BTCPay
+                    that merchants can use to view funds received by paid invoices. The funds from that wallet can only
+                    be spent, if a transaction is signed with the merchant's compatible hardware wallet. This allows
+                    merchants to have complete control of funds received.</p>
+                <h3>How it keeps data private</h3>
+                <p>The data is shared only between two parties - the buyer and a seller. Other payment processors share
+                    and collect user data with other parties, making it very hard to comply with privacy law
+                    regulations like GDPR. Each invoice in BTCPay has a different receiving address, which means there
+                    is no address re-use which improves privacy significantly.</p>
+                <h3>How it resists censorship</h3>
+                <ul style="list-style-type:disc;">
+                    <li>Self-hosted</li>
+                    <li>Can be run on hardware</li>
+                    <li>No third-party</li>
+                    <li>Can be easily re-deployed</li>
+                </ul>
+                <p>BTCPay does not have a central point of failure since nobody is controlling it except for the user
+                    running it. If run on the cloud server, the hosting providers can potentially censor users by
+                    suspending hosting accounts or disabling access to virtual machines. This is always a risk for
+                    anyone using a hosting provider. Since no private keys are stored on the server, a censored
+                    individual can easily re-deploy the server with another host. Your coins are always inside your
+                    wallet. If an invoice is paid while your BTCPay server is down, the software will automatically
+                    determine and notify the merchant of offline invoice payments when your server is back up. If a
+                    hosting provider suspends the server, and there was no proper backup, server settings and invoice
+                    data may be lost, but on-chain payments are always in your wallet. For ultimate
+                    censorship-resistance, users should run BTCPay on their own hardware.</p>
+            </div>
+        </section>
+        <section class="main-section" id="btcpay-installation">
+            <header>BTCPay Installation</header>
+            <div>
+                <h3>Choosing a deployment method</h3>
+                <p>There are several different deployment methods available, all using the same BTCPay Server software.
+                    Because BTCPay is a free and open-source cryptocurrency payment processor, we support diversity in
+                    deployment methods for users. Different solutions work best for different use cases.</p>
+                <p>Business deployment methods can vary by setup, maintenance, support, price, etc. You can run BTCPay
+                    as a self-hosted solution on your own server, or use a third-party host. The self-hosted solution
+                    allows you not only to attach an unlimited number of stores and use the Lightning Network but also
+                    become a payment processor for others.</p>
+                <p>BTCPay is a non-custodial invoicing system which eliminates the involvement of a third-party when
+                    managing funds. Payments with BTCPay go directly to your wallet. Your private keys are never
+                    uploaded to the server. Meaning 3rd Party BTCPay hosts do not control user funds, they are simply
+                    hosting your instance of the BTCPay software for you.</p>
+                <p>Developer deployments are not recommended for production environments and require the user to have
+                    technical knowledge related to the build.</p>
+                <h3>What are my options?</h3>
+                <ul style="list-style-type:disc;">
+                    <li><a href="https://docs.btcpayserver.org/deployment/lunanodewebdeployment">Luna Node Deployment</a></li>
+                    <li><a href="https://docs.btcpayserver.org/deployment/azuredeployment">Azure Deployment</a></li>
+                    <li><a href="https://docs.btcpayserver.org/deployment/dockerdeployment">Docker Deployment</a></li>
+                    <li><a href="https://docs.btcpayserver.org/deployment/googleclouddeployment">Google Cloud
+                            Deployment</a></li>
+                </ul>
+                <h3>Manual Deployment</h3>
+                <p>Manual install info from <a href="http://blog.sipsorcery.com/?p=1052">Sipsorcery's Blog</a></p>
+                <p>This post is about the hard way of setting up a minimal BTCPayServer.</p>
+                <ul>
+                    <li>Bitcoin – the Bitcoin daemon which interacts with the Bitcoin network and blockchain</li>
+                    <li>Lightning (c-lightning or lnd) – the Lightning daemon for near real-time payments on top of
+                        Bitcoin</li>
+                    <li>NBXplorer – a dotnet core application that monitors the Bitcoin blockchain to detect on-chain
+                        payments</li>
+                    <li>BTCPay Server – a dotnet core web application that glues all the pieces together for a merchant
+                        solution</li>
+                </ul>
+                <h3>Bitcoind</h3>
+                <p>First step is to set up a bitcoin daemon and synchronise the blockchain which should definitely be
+                    testnet at this stage. Below are the steps I use but with bitcoin you should always be careful
+                    about what to trust. Ideally double check that the PGP key I refer to matches what’s listed on
+                    other other web sites. This verification process is not academic. For example in 2017 when Bitcoin
+                    Gold forked their blockchain I downloaded their software and performed the verification steps only
+                    to find the SHA checksum failed. Consequently I did not install the software and shortly thereafter
+                    a critical warning notice was issued.</p>
+                <p><code>sudo apt install gnupg2</code></p>
+                <p><code>gpg2 –keyserver pgp.mit.edu –recv-keys 0x90C8019E36C2E964</code></p>
+                <p>Imports Wladimir J. van der Laan’a PGP key (gpg2 edit 01EA5486DE18A882D4C2684590C8019E36C2E96 & then
+                    trust if reqd)</p>
+                <p>Download required BTC version from https://bitcoin.org/en/download (e.g.
+                    https://bitcoincore.org/bin/bitcoin-core-0.17.0/bitcoin-0.17.0-x86_64-linux-gnu.tar.gz)</p>
+                <p>Download the hash file (e.g. https://bitcoincore.org/bin/bitcoin-core-0.17.0/SHA256SUMS.asc)</p>
+                <p><code>gpg2 –verify SHA256SUMS.asc</code></p>
+                <p><code>sha256sum -c –ignore-missing SHA256SUMS.asc</code></p>
+                <p><code>tar zxf bitcoin-0.17.0-x86_64-linux-gnu.tar.gz</code></p>
+                <p><code>cd bitcoin-0.17.0</code></p>
+                <p><code>sudo cp bitcoind bitcoin-cli /usr/bin</code></p>
+                <p><code>mkdir /etc/bitcoin</code></p>
+                <p>The basic /etc/bitcoin/bitcoin.conf file I use is:</p>
+                <p><code>server=1</code></p>
+                <p><code>datadir=/blockchains/bitcoin</code></p>
+                <p><code>listen=1</code></p>
+                <p><code>rpcauth=admin:91f1e6765bb4f8d6ba3a2da16cbd4b1$24f22f6fee475c15a24182d01cd060922e2dff1de9b633ce486f2a68cf9687b0 # admin/password</code></p>
+                <p><code>rpcallowip=192.168.1.0/24</code></p>
+                <p><code>testnet=1</code></p>
+                <p><code>whitelist=0.0.0.0/0</code></p>
+                <p><code>walletbroadcast=0</code></p>
+                <p>If the Bitcoind service doesn't start use:</p>
+                <p><code>sudo journalctl -unit bitcoind -follow</code></p>
+                <p>Check the status of the blockchain synchronisation:</p>
+                <p><code>bitcoin-cli -testnet -rpccookiefile=/blockchains/bitcoin/testnet3/.cookie getblockchaininfo</code>
+                    <h3>Bitcoind RPC</h3>
+                    <p>NBXplorer and any Lightning servers will need to connect to the bitcoind via its RPC interface.
+                        To use the interface either a username/password is required or alternatively bitcoind generates
+                        a cookie file with a random value that can be used. If the bitcoind data directory is left in
+                        its default location then NBXplorer and the Lightning servers should automatically find the
+                        cookie file. If the data directory is moved, for example to take advantage of a network drive
+                        then an extra configuration option will be required and the instructions in the relevant
+                        sections below show them.</p>
+                    <p>The bitcoin-cli client also needs to be authenticated. To save some typing create a ~/.bitcoin
+                        directory, e.g. /home/admin/.bitcoin, and within it create a bitcoin.conf file along the lines
+                        of:</p>
+                    <p><code>testnet=1</code></p>
+                    <p><code>rpccookiefile=/blockchains/bitcoin/testnet3/.cookie </code></p>
+                    <h3>C-Lightning</h3>
+                    <p>The second step is to install a Lightning node. For c-lightning the software must be built from
+                        source as per the instructions here. Once built lightning can also be configured to run as a
+                        systemd daemon.</p>
+                    <p><code>sudo cp /usr/local/bin/lightningd /usr/local/bin/lightning-cli /usr/bin # The lightningd service file looks in /usr/bin.</code></p>
+                    <p>The lightning programs rely on the bitcoin-cli client. There are a few different ways to
+                        configure bitcoin-cli authentication to the bitcoind RPC server. See the section “Bitcoind RPC”
+                        section above for one approach (note if the bitcoind data directory is left as default then the
+                        RPC authentication should just work)</p>
+                    <p>Like bitcoind & bitcoin-cli the c-lightning application has lightningd & lightning-cli. Once the
+                        lightningd daemon is running RPC connectivity can be checked with<code>lightning-cli getinfo</code></p>
+                    <p>The basic /etc/lightningd/lightningd.conf that I use is:</p>
+                    <p><code>network=testnet</code></p>
+                    <p><code>log-level=debug</code></p>
+                    <p><code>addr=0.0.0.0</code></p>
+                    <p><code>bitcoin-datadir=/blockchains/bitcoin</code></p>
+                    <p>If the lightningd service doesn't start use:</p>
+                    <p><code>sudo journalctl –unit lightningd –follow</code></p>
+                    <p>Check the daemon with:</p>
+                    <p><code>lightning-cli get info</code></p>
+                    <h3>NBXplorer</h3>
+                    <p>The third step is to install NBXplorer. Its purpose is to monitor the Bitcoin blockchain so
+                        merchants know when they have received a payment. NBXplorer requires dotnet core.</p>
+                    <p><code>git clone https://github.com/dgarage/NBXplorer</code></p>
+                    <p><code>./build.sh</code></p>
+                    <p>
+                        <Configure the settings.conf file as shown below</p> <p>Check with:<code>/usr/bin/dotnet “/home/admin/src/NBXplorer/NBXplorer/bin/Release/netcoreapp2.1/NBXplorer.dll” -testnet</code>
+                    </p>
+                    <p>Set up NBXplorer as a systemd service. This <a href="https://pmcgrath.net/running-a-simple-dotnet-core-linux-daemon">guide</a>
+                        is a useful starting point</p>
+                    <p>NBXplorer config file in /home/admin/.nbxplorer/TestNet/settings.conf</p>
+                    <p><code>rpccookiefile=/blockchains/bitcoin/testnet3/.cookie </code></p>
+                    <p><code>port=24445</code></p>
+                    <p><code>bind=0.0.0.0</code></p>
+                    <p><code>testnet=1</code></p>
+                    <p>My basic NBXplorer systemd service file:</p>
+                    <p><code>[Unit]</code></p>
+                    <p><code>Description=NBXplorer daemon</code></p>
+                    <p><code>Requires=bitcoind.service</code></p>
+                    <p><code>After=bitcoind.service</code></p>
+                    <p><code>[Service]</code></p>
+                    <p><code>ExecStart=/usr/bin/dotnet "/home/admin/src/NBXplorer/NBXplorer/bin/Release/netcoreapp2.1/NBXplorer.dll" --network=testnet</code></p>
+                    <p><code>User=admin</code></p>
+                    <p><code>Group=admin</code></p>
+                    <p><code>Typ=simple</code></p>
+                    <p><code>PIDFile=/run/nbxplorer.pid</code></p>
+                    <p><code>Restart=on-failure</code></p>
+                    <p><code>PrivateTmp=true</code></p>
+                    <p><code>ProtectSystem=full</code></p>
+                    <p><code>NoNewPrivileges=true</code></p>
+                    <p><code>PrivateDevices=true</code></p>
+                    <p><code>[Install]</code></p>
+                    <p><code>WantedBy=multi-user.target</code></p>
+                    <h3>BTCPay Server</h3>
+                    <p>The fourth step is to install BTCPayServer. This is the web application that will be used by the
+                        merchant for administering their stores, invoices etc.</p>
+                    <p><code>git clone https://github.com/btcpayserver/btcpayserver.git</code></p>
+                    <p><code>./build.sh</code></p>
+                    <p>Configure the settings.conf file as shown below</p>
+                    <p>Check with:<code>cd ~/src/btcpayserver/BTCPayServer; dotnet run –network=testnet –no-launch-profile</code></p>
+                    <p>Set up BTCPay Server as a systemd service</p>
+                    <p>BTCPay Server config file in /home/admin.btcpayserver/TestNet/settings.conf</p>
+                    <p><code>network=testnet</code></p>
+                    <p><code>port=23001</code></p>
+                    <p><code>bind=0.0.0.0</code></p>
+                    <p><code>testnet=1</code></p>
+                    <p>My basic BTCPay Server systemd service file:</p>
+                    <p><code>[Unit]</code></p>
+                    <p><code>Description=BtcPayServer daemon</code></p>
+                    <p><code>Requires=btcpayserverd.service</code></p>
+                    <p><code>After=nbxplorerd.service</code></p>
+                    <p><code>[Service]</code></p>
+                    <p><code>WorkingDirectory=/home/admin/src/btcpayserver/BTCPayServer</code></p>
+                    <p><code>ExecStart=/usr/bin/dotnet "/home/admin/src/btcpayserver/BTCPayServer/bin/Release/netcoreapp2.1/BTCPayServer.dll" --testnet</code></p>
+                    <p><code>User-admin</code></p>
+                    <p><code>Group=admin</code></p>
+                    <p><code>Type=simple</code></p>
+                    <p><code>PIDFile=/run/btcpayserverd/btcpayserverd.pid</code></p>
+                    <p><code>Restart=on-failure</code></p>
+                    <p><code>[Install]</code></p>
+                    <p><code>WantedBy=multi-user.target</code></p>
+            </div>
+        </section>
+        <section class="main-section" id="btcpay-features">
+            <header>BTCPay Features</header>
+            <div>
+            <h3>Internal Wallet</h3>
+            <p>This document explains the features of the internal BTCPay wallet. For frequently asked questions - check the Wallets FAQ</p>
+            <p>Note: A private key (xprv) is never required for BTCPay to work. The software needs a public key (xpub) which is a watch-only wallet token. The xpubkey allows BTCPay to generate a new address each time a new invoice is created. It enables users to observe the wallet balance and transactions without having to share their private key.</p>
+            <p>If you're using a third-party host and are asked to provide a private key, it's certainly a scam. Never share your private key with anyone. It's called private for a reason.</p>
+            <p>BTCPay has an internal, full node reliant wallet that can be accessed by clicking "Wallets" from the top menu. The reliance on the user's own full node makes the wallet more private and secure compared to any SPV wallet.</p>
+            <p>The internal wallet does not generate a private key. Users have to create their own private key and enter xpubkey derived from xpriv into Store Settings > Derivation scheme to activate the internal wallet.</p>
+            <p>The public key can be easily added from external wallet like Electrum by pasting it into derivation scheme field or automatically with a hardware wallet like Ledger Nano S. For more information on how to add a derivation scheme to BTCPay, see the Getting Started Guide​</p>
+            <p>Each store and cryptocurrency have a separate wallet displayed on the Wallets page. To access a particular wallet, select "Manage."</p>
+            <h3>Apps</h3>
+            <p>The primary purpose of BTCPay Server is to remove dependencies on trusted third-parties. The Apps are built in applications that obsolete central-authorities and allow users an easy way to extend the use case of the software. Users can self-host all sorts of customizable applications that work out of the box.</p>
+            <p>To create an app, go to Apps > Create a new app. Apps are store-dependent, which means that each app needs to be connected to a store.</p>
+            <h4>Point of Sale app</h4>
+            <p>The web-based PoS app allows users with brick and mortar stores to readily accept cryptocurrencies without fees or a third-party, directly to their wallet. The PoS can be displayed easily on tablets or any other devices which support web browsing. Users can easily create a homescreen shortcut for a quick access to the web-app.</p>
+            <p>Adding new products is easy. The app has a shopping cart feature, tips, custom payment options and more.</p>
+            <p>Point of sale app can also be used for receiving donations or even as a small e-shop, depending on the customizations applied.</p>
+            <h4>Crowdfunding app</h4>
+            <p>Crowdfunding is an application which you can launch from BTCPay Server interface that allows you to create a self-hosted funding campaign, similar to Kickstarter or Indiegogo. Unlike traditional crowdfunding platforms, the creator of the campaign is the owner of the platform. Funds go directly to the creator’s wallet without any fees.</p>
+            <p>If you would like to provide digital or physical prodcuts to the backers of your crowdfunding campaign, you can integrate WooCommerce store into it.</p>
+            <h3>Lightning Network</h3>
+            <p>After deploying BTCPay Server, you may want to experiment with an innovative second-layer payment system built on top of Bitcoin protocol - the Lightning Network.</p>
+            <p>This guide will show you how to set up your Lightning Network node in BTCPay and guide you through the basics.</p>
+            <p>Before you proceed, please understand that Lightning Network is still in the experimental stage. Do not put the money you can't afford to lose. There is a high risk of you losing the money.</p>
+            <p>Take time to familiarize yourself with the risk. There's no backup for LND or c-lightning keys in BTCPay. Your keys are in a hot-wallet. This means :</p>
+            <ol>
+                <li>If you erase your BTCPay Server or your machine crashes - you lose all the funds.</li>
+                <li>If your server gets hacked - a hacker can take all of your funds by accessing your keys.</li>
+            </ol>
+            <p>While the keys from your Lightning Network don't have a backup and someone can steal them theoretically, your on-chain Bitcoin funds are safe and are never uploaded on the server.</p>
+            <p>As the technology matures and develops, things like a proper backup will be easier to implement in BTCPay.</p>
+            <p>BTCPay currently offers two implementations of the Lightning Network:</p>
+            <ul>
+                 <li>LND</li>
+                 <li>C-Lightning</li>
+            </ul>
+            <h3>Accounting</h3>
+            <p>BTCPay offers several tools that make cryptocurrency bookkeeping easier.</p>  
+            <h4>Invoice Export</h4>
+            <p>To export the invoices, go to Invoices > Export invoices, select the export format (CSV/JSON) and download the file. You can then, customize the fields to fit your business needs and import the data into your accounting software, or create pivot tables from the exported data.</p>
+            <h4>Quickbooks online connector for BTCPay server</h4>
+            <p>BTCQBO is a third-party plugin that enables QuickBooks Online users to connect their BTCPay server easily. Besides bookkeeping, users can quickly generate invoices from their QuickBooks. For more information about the BTCQBO and all the features it offers, check the plugin repository or watch the video below.</p>
+            </div>
+        </section>
+        <section class="main-section" id="btcpay-integrations">
+            <header>BTCPay Integrations</header>
+            <div>
+            <h3>Woocommerce</h3>
+            <p>BTCPay server easily integrates with woocommerce stores via a wordpress plugin.</p>
+            <h3>Drupal</h3>
+            <p>BTCPay integrates with the Drupal Content Management System and Drupal commerce.</p>
+            <h3>Magento</h3>
+            <p>BTCPay also integrates with the Magento E-commerce platform with the Magento Plugin.</p>
+            <h3>Prestahsop</h3>
+            <p>BTCPay also works with the Prestashop E-commerce platform, although it is still a beta version./p>
+            </div>
+        </section>
+        <section class="main-section" id="btcpay-development">
+            <header>BTCPay Development</header>
+            <div>
+            <h3>Architecture</h3>
+            <p>BTCPayServer is a project which ties together several Bitcoin-related components into a coherent user experience for installing and managing your own payment processor.</p>
+            <p>Some community members also offer third-party hosting (Having someone else manage BTCPayServer for you).</p>
+            <p>Remember the huge value of having direct control of your wallet and web service; for this reason we recommend you use Azure deployment or Web-Interface deployment and do the setup yourself - it is pretty easy!</p>
+            </div>
+        </section>
+        <section class="main-section" id="btcpay-faq">
+            <header>BTCPay FAQ</header>
+            <div>
+            <h3>General BTCPay FAQ</h3>
+            <p>What is BTCPay Server?</p>
+            <p>BTCPay Server is a free and open-source cryptocurrency payment processor which allows you to receive payments in Bitcoin (on-chain and via the Lightning Network) and altcoins directly, with no fees, transaction cost or a middleman.</p>
+            <p>BTCPay is a non-custodial invoicing system which eliminates the involvement of a third-party. Payments with BTCPay go directly to your wallet, which increases the privacy and security. Your private keys are never uploaded to the server. There is no address re-use since each invoice generates a new address deriving from your xpubkey.</p>
+            <p>Why should I choose BTCPay over other processors?</p>
+            <p>The most significant advantage of BTCPay over other processors is that it is entirely free and open-source, non-custodial software, created by the community. While most of the other processors hold your Bitcoins, BTCPay allows you to receive payments P2P, directly to your software or hardware wallet.</p>
+            <p>BTCPay is a self-hosted software. This means that you are your own payment processor. There are no subscriptions, no transaction fees. There's no third-party involvement which significantly increases the censorship-resistance, privacy, and security for you and your customers. Furthermore, BTCPay enables you to become a processor yourself, so that you can offer different packages and help spread the adoption locally or globally</p>
+            <p>With BTCPay, you are your own bank.</p>
+            <p>Who can use BTCPay?</p>
+            <p>BTCPay server is a feature-rich software with plenty of use-cases that can solve problems for different types of users. Merchants, content creators, lightning network users, exchanges, hosting providers and many others can find it useful. See the Use Case page for detailed breakdown of BTCPay use-cases.</p>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
